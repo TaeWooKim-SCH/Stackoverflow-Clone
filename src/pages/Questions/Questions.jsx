@@ -1,12 +1,18 @@
 import React from 'react';
 
-import QuestionCard from '../../components/QuestionCard';
+import QuestionTop from '../../components/Questions/QuestionTop';
+import QuestionCard from '../../components/Questions/QuestionCard';
+import { QuestionsData } from '../../dummyData/questionData';
 
-export default function Questions() {
+function Questions() {
   return (
-    <div>
-      <div>Question페이지입니다.</div>
-      <QuestionCard />
-    </div>
+    <section>
+      <QuestionTop totalQuestion={QuestionsData.pageInfo.totalElements} />
+      {QuestionsData.results.map((question) => (
+        <QuestionCard question={question} key={question.id} />
+      ))}
+    </section>
   );
 }
+
+export default Questions;
