@@ -1,13 +1,34 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { useSearchParams, useLocation } from 'react-router-dom';
 
 import QuestionFilter from './QuestionFilter';
 
 function QuestionTop({ totalQuestion }) {
+  // eslint-disable-next-line no-unused-vars
+  const [searchParams, setSearchParams] = useSearchParams();
+  const location = useLocation();
+  const [title, setTitle] = useState('All Question');
+
+  useEffect(() => {
+    if (location.pathname === '/search') {
+      setTitle('Search Results');
+    }
+  }, [location.pathname]);
+
   return (
     <QuestionTopSection>
       <Top>
-        <div>All Questions</div>
+        <div>
+          <div>{title}</div>
+          {title === 'Search Results' ? (
+            <SearchContent>
+              Results for
+              {' '}
+              {searchParams.get('q')}
+            </SearchContent>
+          ) : null}
+        </div>
         <AskQuestion type="button">Ask Question</AskQuestion>
       </Top>
       <Bottom>
@@ -35,6 +56,11 @@ const Top = styled.section`
   display: flex;
   justify-content: space-between;
   margin-bottom: 25px;
+`;
+
+const SearchContent = styled.div`
+  font-size: 12px;
+  margin-top: 10px;
 `;
 
 const AskQuestion = styled.button`

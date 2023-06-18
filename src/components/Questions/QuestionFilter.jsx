@@ -4,9 +4,9 @@ import styled from 'styled-components';
 function QuestionFilter() {
   return (
     <section>
-      <FilterBtn href="/questions">Newest</FilterBtn>
-      <FilterBtn href="/questions">Answered</FilterBtn>
-      <FilterBtn href="/questions">Unanswered</FilterBtn>
+      <FilterBtn href="/questions?tab=newest">Newest</FilterBtn>
+      <FilterBtn href="/questions?tab=answered">Answered</FilterBtn>
+      <FilterBtn href="/questions?tab=unanswered">Unanswered</FilterBtn>
     </section>
   );
 }
@@ -18,7 +18,7 @@ const FilterBtn = styled.a`
   height: 13.84px;
   color: #3B4045;
   /* background-color: #E3E6E8; */
-  font-size: x-small;
+  font-size: 13px;
   padding: 9.6px;
   text-decoration: none;
   border: 1px solid gray;

@@ -17,11 +17,13 @@ function QuestionCard({ question }) {
         </div>
       </QuestionCardLeft>
       <QuestionCardRight>
-        <QuestionCartTitle>{question.title}</QuestionCartTitle>
+        <QuestionCardTitle href={`/questions/${question.id}`}>
+          {question.title}
+        </QuestionCardTitle>
         <QuestionCardBody>{question.content}</QuestionCardBody>
         <QuestionCardTagList>
           {question.tags.map((tag) => (
-            <QuestionCardTag>{tag}</QuestionCardTag>
+            <QuestionCardTag key={tag}>{tag}</QuestionCardTag>
           ))}
         </QuestionCardTagList>
         <QuestionCardInfo>
@@ -55,10 +57,11 @@ const QuestionCardRight = styled.section`
   margin-left: 16px;
 `;
 
-const QuestionCartTitle = styled.div`
+const QuestionCardTitle = styled.a`
   font-size: large;
   font-weight: 400;
   color: #0063BF;
+  text-decoration: none;
 `;
 
 const QuestionCardBody = styled.div`
@@ -70,11 +73,13 @@ const QuestionCardBody = styled.div`
 const QuestionCardInfo = styled.section`
   text-align: right;
   font-size: x-small;
+  cursor: pointer;
 `;
 
 const QuestionCardTagList = styled.section`
   display: flex;
 `;
+
 const QuestionCardTag = styled.section`
   background-color: #E1ECF4;
   border-radius: 3px;
@@ -82,4 +87,5 @@ const QuestionCardTag = styled.section`
   font-size: x-small;
   margin-right: 4px;
   padding: 4.8px 6px;
+  cursor: pointer;
 `;
