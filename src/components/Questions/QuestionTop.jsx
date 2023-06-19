@@ -5,8 +5,7 @@ import { useSearchParams, useLocation } from 'react-router-dom';
 import QuestionFilter from './QuestionFilter';
 
 function QuestionTop({ totalQuestion }) {
-  // eslint-disable-next-line no-unused-vars
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const location = useLocation();
   const [title, setTitle] = useState('All Question');
 

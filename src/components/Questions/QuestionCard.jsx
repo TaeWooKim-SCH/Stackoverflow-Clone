@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import Tag from './Tag';
+
 function QuestionCard({ question }) {
   return (
     <QuestionCardSection>
@@ -23,7 +25,7 @@ function QuestionCard({ question }) {
         <QuestionCardBody>{question.content}</QuestionCardBody>
         <QuestionCardTagList>
           {question.tags.map((tag) => (
-            <QuestionCardTag key={tag}>{tag}</QuestionCardTag>
+            <Tag key={tag} name={tag} />
           ))}
         </QuestionCardTagList>
         <QuestionCardInfo>
@@ -78,14 +80,4 @@ const QuestionCardInfo = styled.section`
 
 const QuestionCardTagList = styled.section`
   display: flex;
-`;
-
-const QuestionCardTag = styled.section`
-  background-color: #E1ECF4;
-  border-radius: 3px;
-  color: #39739D;
-  font-size: x-small;
-  margin-right: 4px;
-  padding: 4.8px 6px;
-  cursor: pointer;
 `;

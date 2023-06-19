@@ -1,14 +1,22 @@
 import React from 'react';
+import { useLocation, useSearchParams } from 'react-router-dom';
 import styled from 'styled-components';
 
 function QuestionPagination() {
+  const location = useLocation();
+  const [searchParams] = useSearchParams();
+  const query = {
+    tab: searchParams.get('tab') !== null ? searchParams.get('tab') : 'newest',
+    q: searchParams.get('q') !== null ? searchParams.get('q') : '',
+  };
+
   return (
     <PaginationSection>
-      <PageBox href="/questions?page=1">1</PageBox>
-      <PageBox href="/questions?page=2">2</PageBox>
-      <PageBox href="/questions?page=3">3</PageBox>
-      <PageBox href="/questions?page=4">4</PageBox>
-      <PageBox href="/questions?page=5">5</PageBox>
+      <PageBox href={`${location.pathname}?page=1${query.q && `&q=${query.q}`}&tab=${query.tab}`}>1</PageBox>
+      <PageBox href={`${location.pathname}?page=2${query.q && `&q=${query.q}`}&tab=${query.tab}`}>2</PageBox>
+      <PageBox href={`${location.pathname}?page=3${query.q && `&q=${query.q}`}&tab=${query.tab}`}>3</PageBox>
+      <PageBox href={`${location.pathname}?page=4${query.q && `&q=${query.q}`}&tab=${query.tab}`}>4</PageBox>
+      <PageBox href={`${location.pathname}?page=5${query.q && `&q=${query.q}`}&tab=${query.tab}`}>5</PageBox>
     </PaginationSection>
   );
 }
@@ -17,6 +25,7 @@ export default QuestionPagination;
 
 const PaginationSection = styled.section`
   display: flex;
+  margin: 30px;
 `;
 
 const PageBox = styled.a`

@@ -9,6 +9,7 @@ export default function QuestionRouter() {
     <Routes>
       <Route path="/questions" element={<Questions />} />
       <Route path="/questions/:id" element={<QuestionDetail />} />
+      <Route path="/search" element={<Questions />} />
     </Routes>
   );
 }
