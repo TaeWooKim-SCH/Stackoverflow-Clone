@@ -2,13 +2,13 @@ import React from 'react';
 import styled from 'styled-components';
 import { VscTriangleDown, VscTriangleUp } from 'react-icons/vsc';
 
-function Vote() {
+function Vote({ votes }) {
   return (
     <VoteSection>
       <VoteAngleBox>
         <VscTriangleUp size="25" />
       </VoteAngleBox>
-      <VoteCount>0</VoteCount>
+      <VoteCount>{votes}</VoteCount>
       <VoteAngleBox>
         <VscTriangleDown size="25" />
       </VoteAngleBox>

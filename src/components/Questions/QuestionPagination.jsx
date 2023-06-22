@@ -2,7 +2,8 @@ import React from 'react';
 import { useLocation, useSearchParams } from 'react-router-dom';
 import styled from 'styled-components';
 
-function QuestionPagination() {
+function QuestionPagination({ pageInfo }) {
+  const pageList = new Array(pageInfo.totalPages).fill(0);
   const location = useLocation();
   const [searchParams] = useSearchParams();
   const query = {
@@ -12,11 +13,9 @@ function QuestionPagination() {
 
   return (
     <PaginationSection>
-      <PageBox href={`${location.pathname}?page=1${query.q && `&q=${query.q}`}&tab=${query.tab}`}>1</PageBox>
-      <PageBox href={`${location.pathname}?page=2${query.q && `&q=${query.q}`}&tab=${query.tab}`}>2</PageBox>
-      <PageBox href={`${location.pathname}?page=3${query.q && `&q=${query.q}`}&tab=${query.tab}`}>3</PageBox>
-      <PageBox href={`${location.pathname}?page=4${query.q && `&q=${query.q}`}&tab=${query.tab}`}>4</PageBox>
-      <PageBox href={`${location.pathname}?page=5${query.q && `&q=${query.q}`}&tab=${query.tab}`}>5</PageBox>
+      {pageList.map((_, pageNumber) => (
+        <PageBox href={`${location.pathname}?page=${pageNumber + 1}${query.q && `&q=${query.q}`}&tab=${query.tab}`} key={pageNumber}>{pageNumber + 1}</PageBox>
+      ))}
     </PaginationSection>
   );
 }

@@ -28,7 +28,7 @@ function QuestionTop({ totalQuestion }) {
             </SearchContent>
           ) : null}
         </div>
-        <AskQuestion type="button">Ask Question</AskQuestion>
+        <AskQuestion href="/questions/ask">Ask Question</AskQuestion>
       </Top>
       <Bottom>
         <div>
@@ -62,8 +62,7 @@ const SearchContent = styled.div`
   margin-top: 10px;
 `;
 
-const AskQuestion = styled.button`
-  height: 37px;
+const AskQuestion = styled.a`
   color: white;
   background-color: #0A95FF;
   padding: 10.4px;
@@ -71,7 +70,7 @@ const AskQuestion = styled.button`
   border: 1px solid white;
   border-radius: 3px;
   box-shadow: inset 0 1px 0 0 hsla(0, 0%, 100%, 0.4);
-  cursor: pointer;
+  text-decoration: none;
 `;
 
 const Bottom = styled.section`

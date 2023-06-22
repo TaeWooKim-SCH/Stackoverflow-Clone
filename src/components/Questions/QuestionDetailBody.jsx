@@ -4,31 +4,35 @@ import styled from 'styled-components';
 import Vote from './Vote';
 import Tag from './Tag';
 
-function QuestionDetailBody({ QuestionsDetailData }) {
+function QuestionDetailBody({ detailData }) {
   return (
     <DetailMain>
-      <Vote />
+      {detailData && <Vote votes={detailData.votes} />}
       <DetailBody>
-        <DetailContent>{QuestionsDetailData.content}</DetailContent>
-        {QuestionsDetailData.tags
-          && (
-          <TagList>
-            {QuestionsDetailData.tags.map((tag) => (
-              <Tag key={tag} name={tag} />
-            ))}
-          </TagList>
-          )}
-        <BodyBottom>
-          <BodyBottomLeft>
-            <LeftElement>Share</LeftElement>
-            <LeftElement>Edit</LeftElement>
-            <LeftElement>Delete</LeftElement>
-          </BodyBottomLeft>
-          <BodyBottomRight>
-            <div>프로필 이미지</div>
-            <div>{QuestionsDetailData.userInfo.userName}</div>
-          </BodyBottomRight>
-        </BodyBottom>
+        {detailData && (
+          <>
+            <DetailContent>{detailData.questionContent}</DetailContent>
+            {/* {detailData.tags
+              && (
+              <TagList>
+                {detailData.tags.map((tag) => (
+                  <Tag key={tag} name={tag} />
+                ))}
+              </TagList>
+              )} */}
+            <BodyBottom>
+              <BodyBottomLeft>
+                <LeftElement>Share</LeftElement>
+                <LeftElement>Edit</LeftElement>
+                <LeftElement>Delete</LeftElement>
+              </BodyBottomLeft>
+              <BodyBottomRight>
+                <div>프로필 이미지</div>
+                {detailData.userInfo && <div>{detailData.userInfo.userName}</div>}
+              </BodyBottomRight>
+            </BodyBottom>
+          </>
+        )}
       </DetailBody>
     </DetailMain>
   );
@@ -43,6 +47,7 @@ const DetailMain = styled.section`
 `;
 
 const DetailBody = styled.div`
+  width: 700px;
   margin-left: 20px;
 `;
 

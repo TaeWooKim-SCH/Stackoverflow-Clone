@@ -19,17 +19,17 @@ function QuestionCard({ question }) {
         </div>
       </QuestionCardLeft>
       <QuestionCardRight>
-        <QuestionCardTitle href={`/questions/${question.id}`}>
-          {question.title}
+        <QuestionCardTitle href={`/questions/${question.questionId}`}>
+          {question.questionTitle}
         </QuestionCardTitle>
-        <QuestionCardBody>{question.content}</QuestionCardBody>
-        <QuestionCardTagList>
+        <QuestionCardBody>{question.questionContent}</QuestionCardBody>
+        {/* <QuestionCardTagList>
           {question.tags.map((tag) => (
             <Tag key={tag} name={tag} />
           ))}
-        </QuestionCardTagList>
+        </QuestionCardTagList> */}
         <QuestionCardInfo>
-          김태우
+          {question.userInfo.userName}
           {' '}
           {question.createAt}
         </QuestionCardInfo>
