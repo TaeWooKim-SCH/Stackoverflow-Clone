@@ -1,5 +1,6 @@
-/* eslint-disable max-len */
 import styled from 'styled-components';
+
+import WorldIcon from '../../assets/header/WorldIcon.png';
 
 const DropDownBody = styled.ul`
     height: 250px;
@@ -7,11 +8,10 @@ const DropDownBody = styled.ul`
     position : absolute;
     background-color: white;
     top: 37px;
-    left: 100px;
+    left: auto;
+    right: 1080px;
     padding: 0;
-    box-shadow: 0 2px 3px rgba(0,0,0,0.12), 0 2px 2px rgba(0,0,0,0.24);
-`;
-
+    box-shadow: 0 2px 3px rgba(0,0,0,0.12), 0 2px 2px rgba(0,0,0,0.24);`;
 const DropDownSectionTop = styled.li`
     display: flex;
     height: 50px;
@@ -22,7 +22,8 @@ const DropDownSectionTop = styled.li`
 
 `;
 
-const DropDownSection = styled.li`
+const DropDownSection = styled.a`
+    text-decoration: none;
     display: flex;
     height: 50px;
     justify-content: left;
@@ -79,9 +80,11 @@ const DropDownText2 = styled.li`
     }
 `;
 
-const WorldIconImg = styled.img`
-    height: 20px;
-    width: 20px;
+const WorldIconImg = styled.div`
+    background-image: url(${WorldIcon});
+    background-size: 19px;
+    height: 19px;
+    width: 23px;
     margin-left: 10px;
     &:hover{  
     color: black;
@@ -89,5 +92,11 @@ const WorldIconImg = styled.img`
 `;
 
 export {
-  DropDownBody, DropDownSectionTop, DropDownTopText, DropDownSection, DropDownText1, DropDownText2, WorldIconImg,
+  DropDownBody,
+  DropDownSectionTop,
+  DropDownTopText,
+  DropDownSection,
+  DropDownText1,
+  DropDownText2,
+  WorldIconImg,
 };

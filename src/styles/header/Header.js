@@ -1,5 +1,7 @@
-/* eslint-disable max-len */
 import styled from 'styled-components';
+
+import HeaderLogo from '../../assets/header/HeaderLogo.png';
+import SearchIcon from '../../assets/header/SearchIcon.png';
 
 const HeaderBody = styled.div`
     height: 52px;
@@ -19,27 +21,40 @@ const HeaderBody = styled.div`
     background-color: white;
 `;
 
+const HeaderSection = styled.a`
+   margin-left: 10px;
+`;
+
 const HeaderMenuImg = styled.img`
     width: 35px;
     height: 35px;
-    margin-right: 15px;
-    margin-left: 90px;
     cursor: pointer;
+`;
+
+const HeaderLogoImg = styled.div`
+    background-image: url(${HeaderLogo});
+    background-size: 156px;
+    width: 156px;
+    height: 42px;  
+    cursor: pointer;
+`;
+
+const InputSection = styled.div`
+    position: relative ;
+    align-items: center;
+    display: flex;
+    margin-left: 100px;
+    margin-right: 100px;
     
 `;
 
-const HeaderLogoImg = styled.img`
-    width: 156px;
-    height: 42px;  
-    margin-right: 100px;
-    cursor: pointer;
-`;
-
-const HeaderSearchIconImg = styled.img`
+const HeaderSearchIconImg = styled.div`
+    background-image: url(${SearchIcon});
+    background-size: 20px;
     width: 20px;
     height: 20px;
-    right: 980px;
     position: absolute ;
+    margin-left: 20px;
     
 `;
 
@@ -60,7 +75,6 @@ const HeaderLoginButton = styled.button`
   height: 35px;
   font-weight: 500;
   padding: 3px;
-  margin-left: 100px;
   flex-shrink: 0;
   cursor: pointer;
 
@@ -81,8 +95,6 @@ const HeaderSignUpButton = styled.button`
   height: 35px;
   font-weight: 500;
   padding: 3px;
-  margin-left: 10px;
-  margin-right: 90px;
   flex-shrink: 0;
   cursor: pointer;
 
@@ -99,5 +111,13 @@ const HeaderSignUpButton = styled.button`
 `;
 
 export {
-  HeaderBody, HeaderMenuImg, HeaderLogoImg, HeaderSearchIconImg, HeaderLoginButton, HeaderSignUpButton, HeaderSearchInput,
+  HeaderBody,
+  HeaderSection,
+  HeaderMenuImg,
+  HeaderLogoImg,
+  InputSection,
+  HeaderSearchIconImg,
+  HeaderLoginButton,
+  HeaderSignUpButton,
+  HeaderSearchInput,
 };

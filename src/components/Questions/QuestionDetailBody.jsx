@@ -5,21 +5,22 @@ import Vote from './Vote';
 import Tag from './Tag';
 
 function QuestionDetailBody({ detailData }) {
+  console.log(detailData);
   return (
     <DetailMain>
       {detailData && <Vote votes={detailData.votes} />}
       <DetailBody>
         {detailData && (
           <>
-            <DetailContent>{detailData.questionContent}</DetailContent>
-            {/* {detailData.tags
+            <DetailContent>{detailData.content}</DetailContent>
+            {detailData.tagInfos
               && (
               <TagList>
-                {detailData.tags.map((tag) => (
-                  <Tag key={tag} name={tag} />
+                {detailData.tagInfos.map((tag) => (
+                  <Tag key={tag.tagId} name={tag.tagName} />
                 ))}
               </TagList>
-              )} */}
+              )}
             <BodyBottom>
               <BodyBottomLeft>
                 <LeftElement>Share</LeftElement>

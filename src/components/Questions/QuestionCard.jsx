@@ -19,15 +19,15 @@ function QuestionCard({ question }) {
         </div>
       </QuestionCardLeft>
       <QuestionCardRight>
-        <QuestionCardTitle href={`/questions/${question.questionId}`}>
-          {question.questionTitle}
+        <QuestionCardTitle href={`/questions/${question.id}`}>
+          {question.title}
         </QuestionCardTitle>
-        <QuestionCardBody>{question.questionContent}</QuestionCardBody>
-        {/* <QuestionCardTagList>
-          {question.tags.map((tag) => (
-            <Tag key={tag} name={tag} />
+        <QuestionCardBody>{question.content}</QuestionCardBody>
+        <QuestionCardTagList>
+          {question.tagInfo.map((tag) => (
+            <Tag key={tag.tagId} name={tag.tagName} />
           ))}
-        </QuestionCardTagList> */}
+        </QuestionCardTagList>
         <QuestionCardInfo>
           {question.userInfo.userName}
           {' '}

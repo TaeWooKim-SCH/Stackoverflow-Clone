@@ -1,94 +1,69 @@
-/* eslint-disable max-len */
 import styled from 'styled-components';
 
+import WorldIcon from '../../assets/header/WorldIcon.png';
+
 const SideBarBody = styled.ul`
-  display: flex;
   border-right: 1px solid #e0e0e0;
+  display: flex;
   flex-direction: column;
-  width: 340px;
+  width: calc(25vw - 3.8vw);
   height: 100%;
   position: fixed;
   margin: 0;
   padding: 0;
   background-color: white;
+  align-items: center;
   
 `;
 
 const SideBarTopSection = styled.li`
   display: flex;
-  height: 50px;
-  width: 186px;
-  margin-left: 150px;
-  margin-top: 50px;
-  cursor: pointer;
+  margin-top: 80px;
+  margin-bottom: 20px;
+  font-size: 13px;
+    color: #8C8C8C;
 `;
 
-const SideBarSection = styled.li`
+const SideBarSection = styled.a`
   display: flex;
-  height: 50px;
-  width: 186px;
-  margin-left: 150px;
+  text-decoration: none;
+  width: calc(25vw - 4.1vw);
+  height: 46px;
   align-items: center;
-
+  justify-content: center;
+  font-size: 16px;
+  color: #8C8C8C;
+  
   &:hover{  
     background-color : #D7D9DC;
     border-right: 5px solid #E5883E ;
+    color: black;
     }
     cursor: pointer;
 `;
 
-const SideBarTopText = styled.li`
-    display: flex;
-    height: 50px;
-    width: 100%;
-    justify-content: left;
-    align-items: center;
-    font-size: 14px;
-    margin-left: 10px;
-    margin-top: 10px;
-
-    color: #8C8C8C;
-`;
-
-const SideBarText1 = styled.li`
-    display: flex;
-    height: 50px;
-    width: 100%;
-    justify-content: left;
-    align-items: center;
-    font-size: 15px;
-    margin-left: 10px;
- 
-    &:hover{  
-    color: black;
-    }
-    color: #8C8C8C;
-`;
-
-const SideBarText2 = styled.li`
-    display: flex;
-    height: 50px;
-    width: 100%;
-    justify-content: left;
-    align-items: center;
-    font-size: 15px;
-    margin-left: 40px;
-
-    color: #8C8C8C;
-    &:hover{  
-    color: black;
-    }
-`;
-
-const WorldIconImg = styled.img`
+const WorldIconImg = styled.div`
+    background-image: url(${WorldIcon});
+    background-size: 20px;
     height: 20px;
     width: 20px;
+    margin-right: 19px;
     margin-left: 10px;
+
     &:hover{  
     color: black;
     }
+`;
+
+const SideBarText = styled.li`
+    display: flex;
+    margin-left: 18px;
 `;
 
 export {
-  SideBarBody, WorldIconImg, SideBarTopSection, SideBarTopText, SideBarSection, SideBarText1, SideBarText2,
+  SideBarBody,
+  WorldIconImg,
+  SideBarTopSection,
+  SideBarSection,
+  SideBarText,
 };

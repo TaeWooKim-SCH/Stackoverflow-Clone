@@ -5,6 +5,8 @@ import Header from './components/header/Header';
 import QuestionRouter from './router/QuestionsRouter';
 import MainRouter from './router/MainRouter';
 import Login from './router/LoginRouter';
+import Users from './router/UserRouter';
+import Footer from './components/Footer/Footer';
 
 function App() {
   return (
@@ -13,7 +15,10 @@ function App() {
       <MainRouter />
       <QuestionRouter />
       <Login />
+      <Users />
+      <Footer />
     </section>
+
   );
 }
 

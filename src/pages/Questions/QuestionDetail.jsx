@@ -6,13 +6,47 @@ import QuestionDetailBody from '../../components/Questions/QuestionDetailBody';
 
 function QuestionDetail() {
   const [detailData, setDetailData] = useState({});
+  const [answerPost, setAnswerPost] = useState('');
   const location = useLocation();
+  const url = import.meta.env.VITE_URL;
 
   const detailFetch = async () => {
-    const res = await fetch(`http://ec2-52-78-106-127.ap-northeast-2.compute.amazonaws.com:8080${location.pathname}`);
+    const res = await fetch(`${url}${location.pathname}`, {
+      method: 'GET',
+      headers: {
+        'ngrok-skip-browser-warning': true,
+      },
+    });
     const json = await res.json();
     json.createdAt = new Date(json.createdAt).toLocaleDateString();
     setDetailData(json);
+  };
+
+  // const detailFetch = async () => {
+  //   const res = await fetch(`http://ec2-52-78-106-127.ap-northeast-2.compute.amazonaws.com:8080${location.pathname}`);
+  //   const json = await res.json();
+  //   json.createdAt = new Date(json.createdAt).toLocaleDateString();
+  //   setDetailData(json);
+  // };
+
+  const createAnswerFetch = async () => {
+    const res = await fetch(`${url}/answers`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'ngrok-skip-browser-warning': true,
+      },
+      body: JSON.stringify({
+        userId: 2,
+        questionId: 5,
+        body: answerPost,
+      }),
+    })
+      .then(() => window.location.reload());
+  };
+
+  const answerOnChangeHandler = (e) => {
+    setAnswerPost(e.target.value);
   };
 
   useEffect(() => {
@@ -24,7 +58,7 @@ function QuestionDetail() {
       {detailData && (
         <>
           <DetailTop>
-            <DetailTopTitle>{detailData.questionTitle}</DetailTopTitle>
+            <DetailTopTitle>{detailData.title}</DetailTopTitle>
             <DetailTopTime>
               Asked
               {' '}
@@ -42,13 +76,18 @@ function QuestionDetail() {
             )}
             {detailData.answers && detailData.answers.answers.length
               ? detailData.answers.answers.map((answer) => (
-                <AnswerBox key={answer.answerId}>
-                  <QuestionDetailBody QuestionsDetailData={answer} />
+                <AnswerBox key={answer.id}>
+                  <QuestionDetailBody detailData={answer} />
                 </AnswerBox>
               )) : <div>답변 없음</div>}
           </Answered>
         </>
       )}
+      <AnswerInputBox>
+        <AnswerInputTitle>Your Answer</AnswerInputTitle>
+        <AnswerInput onChange={(e) => answerOnChangeHandler(e)} />
+        <AnswerPostButton onClick={createAnswerFetch}>Post Your Answer</AnswerPostButton>
+      </AnswerInputBox>
     </DetailSection>
   );
 }
@@ -58,7 +97,8 @@ export default QuestionDetail;
 const DetailSection = styled.section`
   padding: 24px;
   width: 80%;
-  max-width: 1100px;
+  max-width: 700px;
+  margin-left: 50px;
 `;
 
 const DetailTop = styled.section`
@@ -87,4 +127,32 @@ const AnswerCount = styled.div`
 
 const AnswerBox = styled.div`
   border-bottom: 1px solid #cacaca;
+`;
+
+const AnswerInputBox = styled.section`
+  color: black;
+`;
+
+const AnswerInputTitle = styled.div`
+  font-size: x-large;
+  margin-top: 10px;
+  margin-bottom: 20px;
+`;
+
+const AnswerInput = styled.textarea`
+  width: 100%;
+  height: 100px;
+`;
+
+const AnswerPostButton = styled.button`
+  color: white;
+  background-color: #0A95FF;
+  padding: 10.4px;
+  font-size: small;
+  border: 1px solid white;
+  border-radius: 3px;
+  box-shadow: inset 0 1px 0 0 hsla(0, 0%, 100%, 0.4);
+  text-decoration: none;
+  margin-top: 20px;
+  cursor: pointer;
 `;

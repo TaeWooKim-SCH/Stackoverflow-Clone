@@ -17,7 +17,7 @@ import
   GoggleLogo,
 }
   from './StyledLogin';
-import icon from '../../assets/login/stackoverflow-icon.png';
+import icon from '../../assets/login/StackoverflowLogo.svg';
 
 function Login() {
   const [isSignup] = useState(false);

@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 function QuestionAsk() {
   const [form, setForm] = useState({});
+  const url = import.meta.env.VITE_URL;
 
   const onChangeHandler = (e) => {
     if (e.target.name === 'title') {
@@ -13,12 +14,24 @@ function QuestionAsk() {
       const result = { ...form };
       result.content = e.target.value;
       setForm(result);
-    } else if (e.target.name === 'tags') {
+    } else if (e.target.name === 'tagNames') {
       const result = { ...form };
-      result.tags = e.target.value;
+      result.tagNames = e.target.value;
+      result.tagNames = result.tagNames.split(' ');
       setForm(result);
     }
     console.log(form);
+  };
+
+  const askPost = () => {
+    fetch(`${url}/questions/ask?userId=2`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'ngrok-skip-browser-warning': true,
+      },
+      body: JSON.stringify(form),
+    });
   };
 
   return (
@@ -46,9 +59,9 @@ function QuestionAsk() {
             Add up to 5 tags to describe what your question is about.
             Start typing to see suggestions.
           </InputBoxEx>
-          <Input type="text" name="tags" onChange={onChangeHandler} />
+          <Input type="text" name="tagNames" onChange={onChangeHandler} />
         </InputBox>
-        <PostQuestion>Post your question</PostQuestion>
+        <PostQuestion type="submit" onClick={askPost}>Post your question</PostQuestion>
       </AskContainer>
     </QuestionAskSection>
   );

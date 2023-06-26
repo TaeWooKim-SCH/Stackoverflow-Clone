@@ -1,31 +1,70 @@
-/* eslint-disable react/jsx-tag-spacing */
-/* eslint-disable react/jsx-indent */
 /* eslint-disable react/jsx-no-bind */
-/* eslint-disable max-len */
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect, useRef } from 'react';
 
 import {
-  HeaderBody, HeaderMenuImg, HeaderLogoImg, HeaderSearchIconImg, HeaderSearchInput, HeaderLoginButton, HeaderSignUpButton,
+  HeaderBody,
+  HeaderSection,
+  HeaderMenuImg,
+  HeaderLogoImg,
+  InputSection,
+  HeaderSearchIconImg,
+  HeaderSearchInput,
+  HeaderLoginButton,
+  HeaderSignUpButton,
 } from '../../styles/header/Header';
-import HeaderMenu from '../../assets/header/HeaderMenu.png';
-import HeaderLogo from '../../assets/header/HeaderLogo.png';
-import SearchIcon from '../../assets/header/SearchIcon.png';
+import HeaderMenuClose from '../../assets/header/HeaderMenuClose.png';
+import HeaderMenuOpen from '../../assets/header/HeaderMenuOpen.png';
 import DropDown from './DropDown';
 
 function Header() {
-  const navigate = useNavigate();
-  const [isClick, setDropClick] = useState(false);
+  const dropDownRef = useRef(null);
+  const [isDropClick, setDropClick] = useState(false);
+  const [imageSrc, setImageSrc] = useState(HeaderMenuClose);
+
+  function DropClickHandler() {
+    if (isDropClick) {
+      setImageSrc(HeaderMenuClose);
+      setDropClick(false);
+    } else {
+      setImageSrc(HeaderMenuOpen);
+      setDropClick(true);
+    }
+  }
+
+  useEffect(() => {
+    const pageClickEvent = (e) => {
+      if (dropDownRef.current !== null && !dropDownRef.current.contains(e.target)) {
+        setDropClick(!isDropClick);
+        setImageSrc(HeaderMenuClose);
+      }
+    };
+    if (isDropClick) {
+      window.addEventListener('click', pageClickEvent);
+    }
+    return () => {
+      window.removeEventListener('click', pageClickEvent);
+    };
+  }, [isDropClick]);
 
   return (
-    <HeaderBody>
-      {isClick && <DropDown/>}
-      <HeaderMenuImg src={HeaderMenu} onClick={() => setDropClick(!isClick)} />
-      <HeaderLogoImg src={HeaderLogo} onClick={() => navigate('/questions')}/>
-      <HeaderSearchIconImg src={SearchIcon} />
-      <HeaderSearchInput placeholder=" [tag] search within a tag" />
-      <HeaderLoginButton onClick={() => navigate('/login')}>Log in</HeaderLoginButton>
-      <HeaderSignUpButton onClick={() => navigate('/')}>Sign up</HeaderSignUpButton>
+    <HeaderBody ref={dropDownRef}>
+      {isDropClick && <DropDown />}
+      <HeaderSection>
+        <HeaderMenuImg src={imageSrc} onClick={DropClickHandler} />
+      </HeaderSection>
+      <HeaderSection href="/Questions">
+        <HeaderLogoImg />
+      </HeaderSection>
+      <InputSection>
+        <HeaderSearchIconImg />
+        <HeaderSearchInput placeholder=" [tag] search within a tag" />
+      </InputSection>
+      <HeaderSection href="/login">
+        <HeaderLoginButton>Log in</HeaderLoginButton>
+      </HeaderSection>
+      <HeaderSection href="/">
+        <HeaderSignUpButton>Sign up</HeaderSignUpButton>
+      </HeaderSection>
     </HeaderBody>
 
   );
