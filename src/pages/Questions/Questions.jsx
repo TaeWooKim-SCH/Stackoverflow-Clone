@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useLocation, useSearchParams } from 'react-router-dom';
 import styled from 'styled-components';
 
 import QuestionTop from '../../components/Questions/QuestionTop';
@@ -8,9 +8,11 @@ import QuestionPagination from '../../components/Questions/QuestionPagination';
 
 function Questions() {
   const [questions, setQuestions] = useState({});
+  const location = useLocation();
   const [searchParams] = useSearchParams();
   const page = searchParams.get('page') || 1;
   const tab = searchParams.get('tab') || 'newest';
+  const keyword = searchParams.get('keyword');
   const url = import.meta.env.VITE_URL;
 
   const questionsFetch = async () => {
@@ -24,15 +26,40 @@ function Questions() {
     setQuestions(json);
   };
 
-  // const questionsFetch = async () => {
-  //   const res = await fetch(`http://ec2-52-78-106-127.ap-northeast-2.compute.amazonaws.com:8080/questions?page=${page}`);
-  //   const json = await res.json();
-  //   setQuestions(json);
-  //   console.log(questions);
-  // };
+  const searchFetch = async () => {
+    const res = await fetch(`${url}/questions/search?type=title&keyword=${keyword}&page=${page}`, {
+      method: 'GET',
+      headers: {
+        'ngrok-skip-browser-warning': true,
+      },
+    });
+    const json = await res.json();
+    setQuestions(json);
+  };
+
+  const tagFetch = async () => {
+    const tagName = location.pathname.slice(16);
+    const res = await fetch(`${url}/questions/search?type=tag&keyword=${tagName}&page=${page}`, {
+      method: 'GET',
+      headers: {
+        'ngrok-skip-browser-warning': true,
+      },
+    });
+    const json = await res.json();
+    setQuestions(json);
+  };
 
   useEffect(() => {
-    questionsFetch();
+    console.log(location.pathname.slice(0, 16));
+    if (location.pathname === '/search') {
+      searchFetch();
+    }
+    if (location.pathname === '/questions') {
+      questionsFetch();
+    }
+    if (location.pathname.slice(0, 15) === '/questions/tags') {
+      tagFetch();
+    }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

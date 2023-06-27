@@ -20,6 +20,7 @@ function Header() {
   const dropDownRef = useRef(null);
   const [isDropClick, setDropClick] = useState(false);
   const [imageSrc, setImageSrc] = useState(HeaderMenuClose);
+  const [searchText, setSearchText] = useState('');
 
   function DropClickHandler() {
     if (isDropClick) {
@@ -30,6 +31,14 @@ function Header() {
       setDropClick(true);
     }
   }
+
+  const searchOnChangeHandler = (e) => {
+    setSearchText(e.target.value);
+  };
+
+  const searchClickHandler = () => {
+    window.location.href = `http://localhost:5173/search?keyword=${searchText}`;
+  };
 
   useEffect(() => {
     const pageClickEvent = (e) => {
@@ -56,8 +65,8 @@ function Header() {
         <HeaderLogoImg />
       </HeaderSection>
       <InputSection>
-        <HeaderSearchIconImg />
-        <HeaderSearchInput placeholder=" [tag] search within a tag" />
+        <HeaderSearchIconImg onClick={searchClickHandler} />
+        <HeaderSearchInput placeholder=" [tag] search within a tag" onChange={(e) => searchOnChangeHandler(e)} />
       </InputSection>
       <HeaderSection href="/login">
         <HeaderLoginButton>Log in</HeaderLoginButton>

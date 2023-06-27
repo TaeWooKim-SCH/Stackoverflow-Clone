@@ -19,7 +19,7 @@ function QuestionCard({ question }) {
         </div>
       </QuestionCardLeft>
       <QuestionCardRight>
-        <QuestionCardTitle href={`/questions/${question.id}`}>
+        <QuestionCardTitle href={`/questions/${question.questionId}`}>
           {question.title}
         </QuestionCardTitle>
         <QuestionCardBody>{question.content}</QuestionCardBody>

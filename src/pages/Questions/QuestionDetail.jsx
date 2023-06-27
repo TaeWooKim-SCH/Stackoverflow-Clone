@@ -8,6 +8,7 @@ function QuestionDetail() {
   const [detailData, setDetailData] = useState({});
   const [answerPost, setAnswerPost] = useState('');
   const location = useLocation();
+  const detailId = location.pathname.substring(11);
   const url = import.meta.env.VITE_URL;
 
   const detailFetch = async () => {
@@ -22,23 +23,16 @@ function QuestionDetail() {
     setDetailData(json);
   };
 
-  // const detailFetch = async () => {
-  //   const res = await fetch(`http://ec2-52-78-106-127.ap-northeast-2.compute.amazonaws.com:8080${location.pathname}`);
-  //   const json = await res.json();
-  //   json.createdAt = new Date(json.createdAt).toLocaleDateString();
-  //   setDetailData(json);
-  // };
-
   const createAnswerFetch = async () => {
-    const res = await fetch(`${url}/answers`, {
+    await fetch(`${url}/answers`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'ngrok-skip-browser-warning': true,
       },
       body: JSON.stringify({
-        userId: 2,
-        questionId: 5,
+        userId: 1,
+        questionId: detailId,
         body: answerPost,
       }),
     })
@@ -51,6 +45,7 @@ function QuestionDetail() {
 
   useEffect(() => {
     detailFetch();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -98,7 +93,7 @@ const DetailSection = styled.section`
   padding: 24px;
   width: 80%;
   max-width: 700px;
-  margin-left: 50px;
+  margin-left: calc(25vw - 1.8vw);
 `;
 
 const DetailTop = styled.section`

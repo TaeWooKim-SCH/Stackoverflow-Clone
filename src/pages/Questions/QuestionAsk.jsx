@@ -4,6 +4,7 @@ import styled from 'styled-components';
 function QuestionAsk() {
   const [form, setForm] = useState({});
   const url = import.meta.env.VITE_URL;
+  const clientUrl = import.meta.env.VITE_CLIENT_DOMAIN;
 
   const onChangeHandler = (e) => {
     if (e.target.name === 'title') {
@@ -24,14 +25,18 @@ function QuestionAsk() {
   };
 
   const askPost = () => {
-    fetch(`${url}/questions/ask?userId=2`, {
+    fetch(`${url}/questions/ask?userId=1`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'ngrok-skip-browser-warning': true,
       },
       body: JSON.stringify(form),
-    });
+    })
+      .then((res) => res.json())
+      .then((json) => {
+        window.location.href = `${clientUrl}/questions/${json.questionId}`;
+      });
   };
 
   return (

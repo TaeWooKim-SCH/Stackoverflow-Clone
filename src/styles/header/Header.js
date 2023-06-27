@@ -55,7 +55,7 @@ const HeaderSearchIconImg = styled.div`
     height: 20px;
     position: absolute ;
     margin-left: 20px;
-    
+    cursor: pointer;
 `;
 
 const HeaderSearchInput = styled.input`
